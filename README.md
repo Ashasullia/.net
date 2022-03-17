@@ -63,5 +63,53 @@ MessageBox.Show("Reverse String Is : " + revstr, "Result");<br>
 ![Screenshot (22)](https://user-images.githubusercontent.com/99865138/158744842-7ab98538-81a0-4bef-9fcb-40114f09dfb5.png)<br>
 ![Screenshot (23)](https://user-images.githubusercontent.com/99865138/158744979-35a6b43f-aaaa-4b0c-b30e-d3cd8314cb6f.png)<br>
 
+********************************************************************************************<br>
+c# program to Create the Progress Bar<br>
+**********************************************************************************************<br>
+using System;<br>
+using System.Collections.Generic;<br>
+using System.ComponentModel;<br>
+using System.Data;<br>
+using System.Drawing;<br>
+using System.Linq;<br>
+using System.Text;<br>
+using System.Threading;<br>
+using System.Windows.Forms;<br>
+<br>
+namespace WindowsFormsApp3<br>
+{<br>
+    public partial class Form1 : Form<br>
+    {<br>
+        public Form1()<br>
+        {<br>
+            InitializeComponent();<br>
+        }<br>
+        
+
+        private void Form1_Load(object sender, EventArgs e)<br>
+        {<br>
+            backgroundWorker1.WorkerReportsProgress = true;<br>
+            backgroundWorker1.RunWorkerAsync();<br>
+
+        }<br>
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)<br>
+        {<br>
+            for (int i = 1; i <= 100; i++)<br>
+            {<br>
+                Thread.Sleep(50);<br>
+                backgroundWorker1.ReportProgress(i);<br>
+            }<br>
+
+        }<br>
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)<br>
+        {<br>
+            progressBar1.Value = e.ProgressPercentage;<br>
+            this.Text = "Progress: " + e.ProgressPercentage.ToString() + "%";<br>
+        }<br>
+    }<br>
+
+}<br>
 
 
