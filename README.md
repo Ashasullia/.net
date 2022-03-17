@@ -78,37 +78,32 @@ using System.Windows.Forms;<br>
 <br>
 namespace WindowsFormsApp3<br>
 {<br>
-    public partial class Form1 : Form<br>
-    {<br>
-        public Form1()<br>
-        {<br>
-            InitializeComponent();<br>
-        }<br>
-        
+ public partial class Form1 : Form<br>
+{<br>
+public Form1()<br>
+{<br>
+InitializeComponent();<br>
+}<br>
+private void Form1_Load(object sender, EventArgs e)<br>
+{<br>
+backgroundWorker1.WorkerReportsProgress = true;<br>
+backgroundWorker1.RunWorkerAsync();<br>
 
-        private void Form1_Load(object sender, EventArgs e)<br>
-        {<br>
-            backgroundWorker1.WorkerReportsProgress = true;<br>
-            backgroundWorker1.RunWorkerAsync();<br>
+ }<br>
 
-        }<br>
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)<br>
-        {<br>
-            for (int i = 1; i <= 100; i++)<br>
-            {<br>
-                Thread.Sleep(50);<br>
-                backgroundWorker1.ReportProgress(i);<br>
-            }<br>
-
-        }<br>
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)<br>
-        {<br>
-            progressBar1.Value = e.ProgressPercentage;<br>
-            this.Text = "Progress: " + e.ProgressPercentage.ToString() + "%";<br>
-        }<br>
-    }<br>
+ private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)<br>
+ {<br>
+   for (int i = 1; i <= 100; i++)<br>
+  {<br>
+  Thread.Sleep(50);<br>
+ backgroundWorker1.ReportProgress(i);<br>
+ }<br>
+ private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)<br>
+ {<br>
+ progressBar1.Value = e.ProgressPercentage;<br>
+ this.Text = "Progress: " + e.ProgressPercentage.ToString() + "%";<br>
+  }<br>
+  }<br>
 
 }<br>
 
