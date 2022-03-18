@@ -111,3 +111,44 @@ Output:<br>
 ![Screenshot (27)](https://user-images.githubusercontent.com/99865138/158747221-29708268-367f-4989-9245-6f3ebeaf2e1d.png)<br>
 ![Screenshot (28)](https://user-images.githubusercontent.com/99865138/158747303-55641805-7391-45d2-b9a6-dbd7da1fce6d.png)<br>
 
+******************************************************************************************<br>
+Develop a Window form Application to Create Flat Clock<br>
+*********************************************************************************************<br>
+using System;<br>
+using System.Collections.Generic;<br>
+using System.ComponentModel;<br>
+using System.Data;<br>
+using System.Drawing;<br>
+using System.Linq;<br>
+using System.Text;<br>
+using System.Threading.Tasks;<br>
+using System.Windows.Forms;<br>
+
+namespace WindowsFormsApp5<br>
+{<br>
+    public partial class Form1 : Form<br>
+    {<br>
+        public Form1()<br>
+        {<br>
+            InitializeComponent();<br>
+        }<br>
+
+        private void Form1_Load(object sender, EventArgs e)<br>
+        {<br>
+            System.Timers.Timer timer = new System.Timers.Timer();<br>
+            timer.Interval = 1000;//1s 	<br>
+            timer.Elapsed += Timer_Elapsed;<br>
+            timer.Start();<br>
+        }<br>
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)<br>
+        {<br>
+            circularProgressBar1.Invoke((MethodInvoker)delegate<br>
+            {<br>
+                circularProgressBar1.Text = DateTime.Now.ToString("hh:mm:ss"); circularProgressBar1.SubscriptText = DateTime.Now.ToString("tt");//AM or PM  }); <br>
+            });<br>
+        }<br>
+    }<br>
+
+}<br>
+Output:<br>
+![Screenshot (30)](https://user-images.githubusercontent.com/99865138/158941709-6c939bc5-045b-4adb-8116-664e6b8185bd.png)<br>
