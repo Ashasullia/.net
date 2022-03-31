@@ -327,69 +327,69 @@ namespace BinaryTree<br>
             }<br>
             drawTree();<br>
 
-        }
+        }<br>
 
-        private void Add_Click(object sender, EventArgs e)
-        {
-            int value = int.Parse(textBox1.Text); if (root == null)
-                root = new Node(value);
-            else
-            {
-                if (root.Add(value) == false)
-                    MessageBox.Show("The value already exists!");
-            }
-            drawTree();
+        private void Add_Click(object sender, EventArgs e)<br>
+        {<br>
+            int value = int.Parse(textBox1.Text); if (root == null)<br>
+                root = new Node(value);<br>
+            else<br>
+            {<br>
+                if (root.Add(value) == false)<br>
+                    MessageBox.Show("The value already exists!");<br>
+            }<br>
+            drawTree();<br>
 
-        }
+        }<br>
 
-        private void Create_Click(object sender, EventArgs e)
-        {
-            root = null;
-            pictureBox1.Image = null;
+        private void Create_Click(object sender, EventArgs e)<br>
+        {<br>
+            root = null;<br>
+            pictureBox1.Image = null;<br>
 
-        }
+        }<br>
 
-        private void Search_Click(object sender, EventArgs e)
-        {
-            string msg;
-            int value = int.Parse(textBox1.Text); if (root == null)
-            {
-                msg = "Tree is empty";
-            }
-            else
-            {
-                if (root.Exists(value))
-                {
-                    msg = "Value found";
-                }
-                else
-                {
-                    msg = "Value not found";
-                }
-            }
-            MessageBox.Show(msg);
-        }
+        private void Search_Click(object sender, EventArgs e)<br>
+        {<br>
+            string msg;<br>
+            int value = int.Parse(textBox1.Text); if (root == null)<br>
+            {<br>
+                msg = "Tree is empty";<br>
+            }<br>
+            else<br>
+            {<br>
+                if (root.Exists(value))<br>
+                {<br>
+                    msg = "Value found";<br>
+                }<br>
+                else<br>
+                {<br>
+                    msg = "Value not found";<br>
+                }<br>
+            }<br>
+            MessageBox.Show(msg);<br>
+        }<br>
 
- void drawTree()
-        {
-            if (root != null)
-                pictureBox1.Image = root.Draw();
-            else
-                pictureBox1.Image = null;
-            this.Update();
-        }
+ void drawTree()<br>
+        {<br>
+            if (root != null)<br>
+                pictureBox1.Image = root.Draw();<br>
+            else<br>
+                pictureBox1.Image = null;<br>
+            this.Update();<br>
+        }<br>
       
-    }
-    class Node
+    }<br>
+    class Node<br>
     {
-        internal Node left { get; set; }
-        internal Node right { get; set; }
-        internal int value;
-        internal int center = 12;
-        private static Bitmap nodeBg = new Bitmap(30, 25); private static Font font = new Font("Arial", 14);
-        internal Node(int value)
-        {
-            this.value = value;
+        internal Node left { get; set; }<br>
+        internal Node right { get; set; }<br>
+        internal int value;<br>
+        internal int center = 12;<br>
+        private static Bitmap nodeBg = new Bitmap(30, 25); private static Font font = new Font("Arial", 14);<br>
+        internal Node(int value)<br>
+        {<br>
+            this.value = value;<br>
         }
         internal bool Add(int value)
         {
@@ -551,3 +551,105 @@ namespace BinaryTree<br>
     }
 } 
 
+************************************************************************************<br>
+ using System;<br>
+using System.Collections.Generic;<br>
+using System.ComponentModel;<br>
+using System.Data;<br>
+using System.Drawing;<br>
+using System.Linq;<br>
+using System.Text;<br>
+using System.Threading.Tasks;<br>
+using System.Windows.Forms;<br>
+
+namespace notepad   <br>
+{<br>
+    public partial class Form1 : Form<br>
+    {<br>
+        private string fileName;<br>
+        private RichTextBox txtContent;<br>
+        private ToolBar toolBar;<br>
+        internal Form1()<br>
+        {<br>
+            fileName = null;<br>
+            InitializeComponents();<br>
+        }<br>
+        void InitializeComponents()<br>
+        {<br>
+            this.Text = "My notepad";<br>
+            this.MinimumSize = new Size(600, 450);<br>
+            this.FormClosing += new FormClosingEventHandler(NotepadClosing);<br>
+            this.MaximizeBox = true;<br>
+            toolBar = new ToolBar();<br>
+            toolBar.Font = new Font("Arial", 16);<br>
+            toolBar.Padding = new Padding(4);<br>
+            toolBar.ButtonClick += new ToolBarButtonClickEventHandler(toolBarClicked);<br>
+            ToolBarButton toolBarButton1 = new ToolBarButton();<br>
+            ToolBarButton toolBarButton2 = new ToolBarButton();<br>
+            ToolBarButton toolBarButton3 = new ToolBarButton();<br>
+            toolBarButton1.Text = "New";<br><br>
+            toolBarButton2.Text = "Open";<br>
+            toolBarButton3.Text = "Save";<br>
+            toolBar.Buttons.Add(toolBarButton1);<br>
+            toolBar.Buttons.Add(toolBarButton2);<br>
+            toolBar.Buttons.Add(toolBarButton3);<br>
+            txtContent = new RichTextBox();<br>
+            txtContent.Size = this.ClientSize;<br>
+            txtContent.Height -= toolBar.Height;<br>
+            txtContent.Top = toolBar.Height;<br>
+            txtContent.Anchor = AnchorStyles.Left | AnchorStyles.Right |<br>
+           AnchorStyles.Top | AnchorStyles.Bottom;<br>
+            txtContent.Font = new Font("Arial", 16);<br>
+            txtContent.AcceptsTab = true;<br>
+            txtContent.Padding = new Padding(8);<br>
+
+            this.Controls.Add(toolBar);<br>
+            this.Controls.Add(txtContent);<br>
+        }<br>
+        private void toolBarClicked(Object sender, ToolBarButtonClickEventArgs e)<br>
+        {<br>
+            saveFile();<br>
+            switch (toolBar.Buttons.IndexOf(e.Button))<br>
+            {<br>
+                case 0:<br>
+                    this.Text += "My notepad";<br>
+                    txtContent.Text = string.Empty;<br>
+                    fileName = null;<br>
+                    break;<br>
+                case 1:<br>
+                    OpenFileDialog openDlg = new OpenFileDialog();<br>
+                    if (DialogResult.OK == openDlg.ShowDialog())<br>
+                    {<br>
+                        fileName = openDlg.FileName;<br>
+                        txtContent.LoadFile(fileName);<br>
+                        this.Text = "My notepad " + fileName;<br>
+                    }<br>
+                    break;<br>
+            }<br>
+        }<br>
+        void saveFile()<br>
+        {<br>
+            if (fileName == null)<br>
+            {<br>
+                SaveFileDialog saveDlg = new SaveFileDialog();<br>
+                if (DialogResult.OK == saveDlg.ShowDialog())<br>
+                {<br>
+                    fileName = saveDlg.FileName;<br>
+                    this.Text += " " + fileName;<br>
+                }<br>
+            }<br>
+            else<br>
+            {<br>
+                txtContent.SaveFile(fileName, RichTextBoxStreamType.RichText);<br>
+            }<br>
+        }<br>
+        private void NotepadClosing(Object sender, FormClosingEventArgs e)<br>
+        {<br>
+            saveFile();<br>
+        }<br>
+        static void main(String[] args)<br>
+        {<br>
+ Application.Run(new Form1());<br>
+        }<br>
+    }<br>
+}<br>
